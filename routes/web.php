@@ -85,9 +85,7 @@ Route::get('/products/about', [ProductsController::class, 'about']);
 
 /* Route::get('/about', 'App\Http\Controllers\HomeController@about')->name("home.about"); */
 
-/**
- * Refactoring routes
- */
+// Refactoring routes (Cleaner: Login is defined inside HomeController)
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 

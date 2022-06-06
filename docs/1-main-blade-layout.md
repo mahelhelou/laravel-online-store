@@ -1,12 +1,19 @@
+# Create Main Blade Layout
+
+## Define the Main Blade Layout
+
+- In `resources/views/layouts` create a file named `app.blade.php`:
+
+```php
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href={{ asset('css/app.css') }}>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <title>@yield('title', 'Online Store')</title>
 </head>
 
@@ -49,9 +56,67 @@
       </small>
     </div>
   </div>
-  <!-- footer -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
   </script>
 </body>
-
 </html>
+```
+
+`@yield` is used as a marker. We will inject code in those markers from child Blade views (using the `@section` directive). `@yield` uses two parameters, the first is the marker identifier. The second is a default value that will be injected if a child view does not inject code for that marker.
+
+We've include 3 `Balde` directives:
+
+- `@yield('title', 'Online Store')`: Used to inject the page title of the child blade.
+- `@yield('subtitle', 'A Laravel Online Store')`: Used to inject the masthead title.
+- `@yield('subtitle')`: Used to inject the child blade content.
+
+## Edit the Welcome Blade View
+
+- Remove everything in the file, and replace it with the following code:
+
+```php
+@extends('layouts.app')
+@section('title', 'Home Page - Online Store')
+@section('content')
+  <div class="text-center">
+    Welcome to the application
+  </div>
+@endsection
+```
+
+## Edit Navigation Links
+
+We use the `route` helper method in the previous layout, which generates a URL for a given named route. We used the names of the routes defined for the (“/”) route `(home.index)` and the (“/about”) route `(home.about)`.
+
+## Include a Custom CSS File
+
+- Create a CSS file in the `public/css` directory named `app.css`:
+
+```css
+.bg-secondary {
+	background-color: #2c3e50 !important;
+}
+
+.copyright {
+	background-color: #1a252f;
+}
+
+.bg-primary {
+	background-color: #1abc9c !important;
+}
+
+nav {
+	font-weight: 700;
+}
+
+.img-card {
+	height: 18vw;
+	object-fit: cover;
+}
+```
+
+## Reference the Custom CSS File
+
+```php
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+```
