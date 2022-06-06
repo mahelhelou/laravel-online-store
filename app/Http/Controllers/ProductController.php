@@ -67,8 +67,8 @@ class ProductController extends Controller {
     // Getting data from DB (Single product)
     $product = Product::findOrFail($id);
 
-    $viewData["title"] = $product["name"]." - Online Store";
-    $viewData["subtitle"] = $product["name"]." - Product information";
+    $viewData["title"] = $product["name"] . " - Online Store";
+    $viewData["subtitle"] = $product["name"] . " - Product information";
     $viewData["product"] = $product;
 
     return view('product.show')->with("viewData", $viewData);

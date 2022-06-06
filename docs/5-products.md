@@ -137,3 +137,47 @@ class ProductController extends Controller {
 ```
 
 ## List Products From Database
+
+- Replace the `ProductController::$products` with the `Product` model.
+- The model is called to connect to the database and get the data.
+- We remove the products dummy attribute since we don’t need it anymore. We will instead retrieve the products data from the database.
+
+```php
+use App\Models\Product;
+
+class ProductController extends Controller {
+  // Products data (Replaced with products from database)
+  // $products = [... ];
+
+  public function index() {
+    $viewData = [];
+    $viewData["title"] = "Products - Online Store";
+    $viewData["subtitle"] = "List of products";
+
+    // Static data (Products)
+    // $viewData["products"] = ProductController::$products;
+
+    // Getting data from DB
+    $viewData['products'] = Product::all();
+
+    return view('product.index')->with("viewData", $viewData);
+  }
+
+  // Show product details in 'product' page
+  public function show($id) {
+    $viewData = [];
+
+    // Static data (Single product)
+    // $product = ProductController::$products[$id-1];
+
+    // Getting data from DB (Single product)
+    $product = Product::findOrFail($id);
+
+    $viewData["title"] = $product["name"] . " - Online Store";
+    $viewData["subtitle"] = $product["name"] . " - Product information";
+    $viewData["product"] = $product;
+
+    return view('product.show')->with("viewData", $viewData);
+  }
+}
+```
