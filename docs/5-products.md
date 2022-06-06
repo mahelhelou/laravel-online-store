@@ -98,7 +98,7 @@ class ProductController extends Controller {
     <div class="card">
       <img src="{{ asset('/images/' . $product['image']) }}" class="card-img-top img-card">
       <div class="card-body text-center">
-        <a href="{{ route('product.show/' . $product['id']]) }}" class="btn bg-primary text-white">{{
+                <a href="{{ route('product.show', ['id' => $product['id']]) }}" class="btn bg-primary text-white">{{
           $product["name"] }}</a>
       </div>
     </div>
@@ -109,10 +109,6 @@ class ProductController extends Controller {
 ```
 
 > **Note:** You can pass the `product_id` as an array in the route in the view file.
-
-```php
-<a href="{{ route('product.show/' . $product['id']]) }}" class="btn bg-primary text-white">{{
-```
 
 - `product.show` view:
 

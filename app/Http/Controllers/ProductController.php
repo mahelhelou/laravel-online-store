@@ -39,7 +39,10 @@ class ProductController extends Controller {
     ]
   ]; */
 
-  // View all products in 'products' page
+  /**
+   * View all products in 'products' page
+   * The index method gets the array of products and sends them to the product.index view to be displayed.
+   */
   public function index() {
     $viewData = [];
     $viewData["title"] = "Products - Online Store";
