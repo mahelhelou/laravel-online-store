@@ -374,8 +374,6 @@ class Product extends Model {
 - Refactoring the `ProductController`:
 
 ```php
-<?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -458,6 +456,10 @@ class ProductController extends Controller {
 - Refactoring the `product.index`:
 
 ```php
+// Replace this
+<a href="{{ route('product.show', ['id' => $product['id']]) }}" class="btn bg-primary text-white">{{ $product["name"] }}</a>
+
+// With this (Comes from Product Model)
 <a href="{{ route('product.show', ['id' => $product->getId()]) }}"
 class="btn bg-primary text-white">{{ $product->getName() }}</a>
 ```
@@ -465,14 +467,25 @@ class="btn bg-primary text-white">{{ $product->getName() }}</a>
 - Refactoring the `product.show`:
 
 ```php
-<img src="{{ asset('/img/'.$viewData["product"]->getImage()) }}" class="img-fluid rounded-start">
+// Replace this
+<img src="{{ asset('/images/' . $viewData['product']['image']) }}" class="img-fluid rounded-start">
 
-<div class="card-body">
-  <h5 class="card-title">
-  {{ $viewData["product"]->getName() }} (${{ $viewData["product"]->getPrice() }})</h5>
-  <p class="card-text">{{ $viewData["product"]->getDescription() }}</p>
-  <p class="card-text"><small class="text-muted">Add to Cart</small></p>
-</div>
+// With this
+<img src="{{ asset('/images/' . $viewData['product']->getImage()) }}" class="img-fluid rounded-start">
+
+// Replace this
+<h5 class="card-title">{{ $viewData['product']['name'] }} (${{ $viewData['product']['price'] }})</h5>
+
+// With this
+<h5 class="card-title">{{ $viewData["product"]->getName() }} (${{ $viewData["product"]->getPrice() }})</h5>
+
+// Replace this
+<p class="card-text">{{ $viewData['product']['description'] }}</p>
+<p class="card-text"><small class="text-muted">Add to Cart</small></p>
+
+// With this
+<p class="card-text">{{ $viewData["product"]->getDescription() }}</p>
+<p class="card-text"><small class="text-muted">Add to Cart</small></p>
 ```
 
 ### The Benefits of Using Getters and Setters
@@ -484,3 +497,5 @@ public function getName() {
   return strtoupper($this->attributes['name']);
 }
 ```
+
+## List Products in Admin Panel

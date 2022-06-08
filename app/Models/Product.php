@@ -35,6 +35,9 @@ class Product extends Model {
     public function getName()
     {
         return $this->attributes['name'];
+
+        // Return upper case name
+        // return strtoupper($this->attributes['name']);
     }
 
     public function setName($name)
