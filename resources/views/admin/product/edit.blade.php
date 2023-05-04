@@ -5,7 +5,7 @@
 @section('content')
 <div class="card mb-4">
   <div class="card-header">
-    Create Products
+    Edit Product: {{ $viewData['product']->getName() }}
   </div>
   <div class="card-body">
 		{{-- Laravel provides an $errors variable which is available in all views. --}}
@@ -18,14 +18,15 @@
     @endif
 
 		<!-- Tip: Always use client side validation rules like 'required' -->
-    <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.product.update', ['id' => $viewData['product']->getId()]) }}" enctype="multipart/form-data">
       @csrf
+			@method('PUT')
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="name" value="{{ old('name') }}" type="text" class="form-control" required>
+              <input name="name" value="{{ $viewData['product']->getName() }}" type="text" class="form-control" required>
             </div>
           </div>
         </div>
@@ -33,7 +34,7 @@
           <div class="mb-3 row">
             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Price:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="price" value="{{ old('price') }}" type="number" class="form-control" required>
+              <input name="price" value="{{ $viewData['product']->getPrice() }}" type="number" class="form-control" required>
             </div>
           </div>
         </div>
@@ -54,51 +55,12 @@
 
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea class="form-control" name="description" rows="3" required>{{ old('description') }}</textarea>
+        <textarea class="form-control" name="description" rows="3" required>{{ $viewData['product']->getDescription() }}</textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary">Create Product</button>
+      <button type="submit" class="btn btn-primary">Edit Product</button>
     </form>
   </div>
 </div>
 
-<div class="card">
-  <div class="card-header">
-    Manage Products
-  </div>
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Edit</th>
-          <th scope="col">Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($viewData["products"] as $product)
-        <tr>
-          <td>{{ $product->getId() }}</td>
-          <td>{{ $product->getName() }}</td>
-          <td>
-						<a class="btn btn-primary" href="{{ route('admin.product.edit', $product->getId()) }}">
-							<i class="bi-pencil"></i>
-						</a>
-					</td>
-          <td>
-						<form action="{{ route('admin.product.delete', $product->getId()) }}" method="POST">
-							@csrf
-							@method('DELETE')
-							<button class="btn btn-danger">
-								<i class="bi-trash"></i>
-							</button>
-						</form>
-					</td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-</div>
 @endsection

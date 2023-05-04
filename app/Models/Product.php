@@ -2,17 +2,25 @@
 
 namespace App\Models;
 
-/**
- * HasFactory is used to automate the migration process (Out of the book's scope)
- */
+// HasFactory is used to automate the migration process (Out of the book's scope)
 // use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model {
 	// use HasFactory;
 
+	// Always include validation into Model NOT controller or create separate class
+	public static function validate($request) {
+		$request->validate([
+			'name' => ['required', 'max:40'],
+			'price' => ['required', 'numeric'],
+			'description' => ['required', 'max:255'],
+			'image' => 'image'
+		]);
+	}
+
 	/**
-	 * PRODUCT ATTRIBUTES
+	 * Product Attributes
 	 * $this->attributes['id'] - int - contains the product primary key (id)
 	 * $this->attributes['name'] - string - contains the product name
 	 * $this->attributes['description'] - string - contains the product description
@@ -22,9 +30,17 @@ class Product extends Model {
 	 * $this->attributes['updated_at'] - timestamp - contains the product update date
 	 */
 
+	/**
+	 * Use Case:
+	 * This method is better and cleaner!
+	 * It applies the encapsulation pillar of OOP
+	 * And it deals with DB in one singe file/place (Model)
+	 * If you want to return UPPERCASE names of all products, you just edit the `getName()` by returning `strtoupper($name)`
+	 */
+
 	public function getId()
     {
-        return $this->attributes['id'];
+			return $this->attributes['id'];
     }
 
     public function setId($id)

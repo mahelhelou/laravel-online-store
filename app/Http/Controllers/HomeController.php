@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller {
   public function index() {
-    $viewData = [];
-    $viewData["title"] = "Home Page - Online Store";
+    $viewData = [
+			'title' => 'Home Page - Online Store'
+		];
+
     return view('home.index')->with("viewData", $viewData);
   }
 
@@ -27,11 +29,13 @@ class HomeController extends Controller {
     ->with("description", $description)
     ->with("author", $author); */
 
-    $viewData = [];
-    $viewData["title"] = "About us - Online Store";
-    $viewData["subtitle"] = "About us";
-    $viewData["description"] = "This is an about page ...";
-    $viewData["author"] = "Developed by: Your Name";
+    $viewData = [
+			'title' => 'About us - Online Store',
+			'subtitle' => 'About us',
+			'description' => 'This is an about page ...',
+			'author' => 'Developed by: Your Name'
+		];
+
     return view('home.about')->with("viewData", $viewData);
   }
 }

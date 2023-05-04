@@ -18,9 +18,7 @@ Let’s check some considerations when using Laravel Eloquent.
 - Eloquent will assume the Product model stores records in the products table (check the additional ‘s’). This convention applies to all models.
 - By default, Eloquent expects `created_at` and `updated_at` columns to existing on your model's corresponding database table. Eloquent will automatically set these column's values when models are created or updated. For all our migrations, we will use the timestamps method which creates these columns.
 
-## Key methods
-
-Let’s discuss some key methods that Eloquent provides to our models.
+## Eloquent Key methods
 
 - `Product::all()`: retrieve all product records.
 - `Product::find(1)`: retrieve the product with id 1.

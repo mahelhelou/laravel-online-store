@@ -9,8 +9,9 @@ use App\Models\Product;
 
 class ProductController extends Controller {
   // Products data
-  /* [
-      "id" => "1",
+  /* public static $products = [
+    [
+			"id" => "1",
       "name" => "TV",
       "description" => "Best TV",
       "image" => "game.png",
@@ -36,7 +37,7 @@ class ProductController extends Controller {
       "description" => "Best Glasses",
       "image"  =>  "game.png",
       "price" => "100"
-    ]
+		]
   ]; */
 
   /**
@@ -44,32 +45,38 @@ class ProductController extends Controller {
    * The index method gets the array of products and sends them to the product.index view to be displayed.
    */
   public function index() {
-    $viewData = [];
-    $viewData["title"] = "Products - Online Store";
-    $viewData["subtitle"] = "List of products";
+    $viewData = [
+			'title' => 'Products - Online Store',
+			'subtitle' => 'List of products',
 
-    // Static data (Products)
-    // $viewData["products"] = ProductController::$products;
+			// Static data (Products)
+			// 'products' => ProductController::$products,
 
-    // Getting data from DB
-    $viewData['products'] = Product::all();
+			// Getting data from DB
+			'products' => Product::all(),
+		];
+
+
 
     return view('product.index')->with("viewData", $viewData);
   }
 
-  // Show product details in 'product' page
+  // Single product view
   public function show($id) {
-    $viewData = [];
+		/**
+		 * $products used to retrieve a product resource based on its (id).
+		 * The first $product variable is from $products array in `index` method.
+		 * The second $product uses `Product` model to retrieve the product resource from DB.
+		 */
 
-    // Static data (Single product)
     // $product = ProductController::$products[$id-1];
-
-    // Getting data from DB (Single product)
     $product = Product::findOrFail($id);
 
-    $viewData["title"] = $product["name"] . " - Online Store";
-    $viewData["subtitle"] = $product["name"] . " - Product information";
-    $viewData["product"] = $product;
+    $viewData = [
+			'title' => $product["name"] . " - Online Store",
+			'subtitle' => $product["name"] . " - Product information",
+			'product' => $product
+		];
 
     return view('product.show')->with("viewData", $viewData);
   }
