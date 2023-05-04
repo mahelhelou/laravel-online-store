@@ -1,13 +1,31 @@
 # Laravel Online Store
 
+## Logins
+
+- Elhelou, Elhelou123456
+- mahmoud@test.com, Mahmoud123456
+- (Admin): daniel@danielgara.com, testPass
+
 ## References
 
+- [DB: Factories and Seeders](https://laravel.com/docs/9.x/database-testing)
 - [DB: Available Column Types](https://laravel.com/docs/9.x/migrations#available-column-types)
 - [DB: Laravel Eloquent](https://laravel.com/docs/9.x/eloquent)
 - [Model: Accessors and Mutators](https://laravel.com/docs/9.x/eloquent-mutators#accessors-and-mutators)
 - [CSRF Attacks](https://owasp.org/www-community/attacks/csrf)
 - [Request: Validation Rules](https://laravel.com/docs/9.x/validation#available-validation-rules)
 - [Validation](https://laravel.com/docs/9.x/validation)
+- [Interact With App Using Terminal](https://laravel.com/docs/9.x/artisan#tinker)
+  - You can create a new user in DB using Terminal.
+  - You can list all products via `$products = App\Models\Product::all();`.
+- [Gates and Policies](https://laravel.com/docs/9.x/authorization)
+- [Service-oriented Applications](https://laravel.com/docs/9.x/eloquent-resources)
+- [Query Builders](https://laravel.com/docs/9.x/queries)
+- [Laravel Testing](https://laravel.com/docs/9.x/testing)
+- [Pagination](https://laravel.com/docs/9.x/pagination)
+- [Laravel Cache](https://laravel.com/docs/9.x/cache)
+- [Emailing](https://laravel.com/docs/9.x/mail)
+- [i18n](https://laravel.com/docs/9.x/localization)
 
 ## Online Store App Scope
 
